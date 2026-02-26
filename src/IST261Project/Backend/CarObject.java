@@ -1,6 +1,6 @@
 package IST261Project.Backend;
 
-public class CarObject {
+public class CarObject extends InventoryObject{
     private String make;
     private String model;
     private String bodyStyle;
@@ -11,16 +11,18 @@ public class CarObject {
     private double engineSize;
     private double price;
 
-    public CarObject(double price, double engineSize, double gasMileage, int mileage, int year, String color, String bodyStyle, String model, String make) {
-        this.price = price;
-        this.engineSize = engineSize;
-        this.gasMileage = gasMileage;
-        this.mileage = mileage;
-        this.year = year;
-        this.color = color;
-        this.bodyStyle = bodyStyle;
-        this.model = model;
+    public CarObject(int inventoryNumber, String make, String model, String bodyStyle, String color,
+                     int year, int mileage, double gasMileage, double engineSize, double price) {
+        super(inventoryNumber);
         this.make = make;
+        this.model = model;
+        this.bodyStyle = bodyStyle;
+        this.color = color;
+        this.year = year;
+        this.mileage = mileage;
+        this.gasMileage = gasMileage;
+        this.engineSize = engineSize;
+        this.price = price;
     }
 
     //Getter Methods

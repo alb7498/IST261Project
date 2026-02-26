@@ -1,13 +1,14 @@
 package IST261Project;
 
+import IST261Project.Backend.CarObject;
 import IST261Project.Backend.InventoryObject;
 
 public class Main {
 
 
     public static void main(String[] args) {
-        InventoryObject car = new InventoryObject(12000, 4.8, 13.5, 12342, 2018,
-                "Red", "SUV", "Terrain", "GMC", "000001");
+        CarObject car = new CarObject(00001, "GMC", "Terrain", "SUV", "Red", 2017, 12343
+        , 17.9, 2.4, 12000);
 
         System.out.println(car.toString());
 
