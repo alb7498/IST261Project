@@ -1,81 +1,4 @@
 {
-  "1001": {
-    "make": "Toyota",
-    "model": "Camry",
-    "bodyStyle": "Sedan",
-    "color": "Black",
-    "year": 2020,
-    "mileage": 35000,
-    "gasMileage": 32.5,
-    "engineSize": 2.5,
-    "price": 20000
-  },
-  "1002": {
-    "make": "Honda",
-    "model": "Civic",
-    "bodyStyle": "Sedan",
-    "color": "White",
-    "year": 2019,
-    "mileage": 42000,
-    "gasMileage": 34.1,
-    "engineSize": 2.0,
-    "price": 18500
-  },
-  "1003": {
-    "make": "Ford",
-    "model": "F150",
-    "bodyStyle": "Truck",
-    "color": "Blue",
-    "year": 2022,
-    "mileage": 12000,
-    "gasMileage": 22.0,
-    "engineSize": 3.5,
-    "price": 35000
-  },
-  "1004": {
-    "make": "Chevrolet",
-    "model": "Silverado",
-    "bodyStyle": "Truck",
-    "color": "Red",
-    "year": 2021,
-    "mileage": 18000,
-    "gasMileage": 20.5,
-    "engineSize": 5.3,
-    "price": 38000
-  },
-  "1005": {
-    "make": "Nissan",
-    "model": "Altima",
-    "bodyStyle": "Sedan",
-    "color": "Gray",
-    "year": 2020,
-    "mileage": 28000,
-    "gasMileage": 31.0,
-    "engineSize": 2.5,
-    "price": 19500
-  },
-  "1006": {
-    "make": "Jeep",
-    "model": "Wrangler",
-    "bodyStyle": "SUV",
-    "color": "Green",
-    "year": 2021,
-    "mileage": 22000,
-    "gasMileage": 21.0,
-    "engineSize": 3.6,
-    "price": 41000
-  },
-  "1007": {
-    "make": "Subaru",
-    "model": "Outback",
-    "bodyStyle": "SUV",
-    "color": "Silver",
-    "year": 2018,
-    "mileage": 54000,
-    "gasMileage": 27.0,
-    "engineSize": 2.5,
-    "price": 17500
-  },
   "1008": {
     "make": "BMW",
     "model": "330i",
@@ -85,7 +8,7 @@
     "mileage": 9000,
     "gasMileage": 30.0,
     "engineSize": 2.0,
-    "price": 44000
+    "price": 44000.0
   },
   "1009": {
     "make": "Tesla",
@@ -94,9 +17,9 @@
     "color": "White",
     "year": 2023,
     "mileage": 5000,
-    "gasMileage": 0,
-    "engineSize": 0,
-    "price": 47000
+    "gasMileage": 0.0,
+    "engineSize": 0.0,
+    "price": 47000.0
   },
   "1010": {
     "make": "Toyota",
@@ -107,6 +30,72 @@
     "mileage": 24000,
     "gasMileage": 28.0,
     "engineSize": 2.5,
-    "price": 29500
+    "price": 29500.0
+  },
+  "1002": {
+    "make": "Honda",
+    "model": "Civic",
+    "bodyStyle": "Sedan",
+    "color": "White",
+    "year": 2019,
+    "mileage": 42000,
+    "gasMileage": 34.1,
+    "engineSize": 2.0,
+    "price": 18500.0
+  },
+  "1003": {
+    "make": "Ford",
+    "model": "F150",
+    "bodyStyle": "Truck",
+    "color": "Blue",
+    "year": 2022,
+    "mileage": 12000,
+    "gasMileage": 22.0,
+    "engineSize": 3.5,
+    "price": 35000.0
+  },
+  "1004": {
+    "make": "Chevrolet",
+    "model": "Silverado",
+    "bodyStyle": "Truck",
+    "color": "Red",
+    "year": 2021,
+    "mileage": 18000,
+    "gasMileage": 20.5,
+    "engineSize": 5.3,
+    "price": 38000.0
+  },
+  "1005": {
+    "make": "Nissan",
+    "model": "Altima",
+    "bodyStyle": "Sedan",
+    "color": "Gray",
+    "year": 2020,
+    "mileage": 28000,
+    "gasMileage": 31.0,
+    "engineSize": 2.5,
+    "price": 19500.0
+  },
+  "1006": {
+    "make": "Jeep",
+    "model": "Wrangler",
+    "bodyStyle": "SUV",
+    "color": "Green",
+    "year": 2021,
+    "mileage": 22000,
+    "gasMileage": 21.0,
+    "engineSize": 3.6,
+    "price": 41000.0
+  },
+  "1007": {
+    "make": "Subaru",
+    "model": "Outback",
+    "bodyStyle": "SUV",
+    "color": "Silver",
+    "year": 2018,
+    "mileage": 54000,
+    "gasMileage": 27.0,
+    "engineSize": 2.5,
+    "price": 17500.0
   }
 }

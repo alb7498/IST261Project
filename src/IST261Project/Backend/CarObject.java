@@ -3,7 +3,10 @@ package IST261Project.Backend;
 public class CarObject extends InventoryObject{
     private String make;
     private String model;
-    private String bodyStyle;
+
+
+    //make enum
+    private String  bodyStyle;
     private String color;
     private int year;
     private int mileage;
