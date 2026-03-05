@@ -67,7 +67,8 @@ public class CarObject extends InventoryObject{
     @Override
     public String toString() {
         return "CarObject{" +
-                "make='" + make + '\'' +
+                "inventoryNumber=" + getInventoryNumber() +
+                ", make='" + make + '\'' +
                 ", model='" + model + '\'' +
                 ", bodyStyle='" + bodyStyle + '\'' +
                 ", color='" + color + '\'' +
