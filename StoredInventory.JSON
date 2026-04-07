@@ -8,7 +8,8 @@
     "mileage": 9000,
     "gasMileage": 30.0,
     "engineSize": 2.0,
-    "price": 44000.0
+    "price": 44000.0,
+    "inventoryNumber": 1008
   },
   "1009": {
     "make": "Tesla",
@@ -19,7 +20,8 @@
     "mileage": 5000,
     "gasMileage": 0.0,
     "engineSize": 0.0,
-    "price": 47000.0
+    "price": 47000.0,
+    "inventoryNumber": 1009
   },
   "1010": {
     "make": "Toyota",
@@ -30,7 +32,8 @@
     "mileage": 24000,
     "gasMileage": 28.0,
     "engineSize": 2.5,
-    "price": 29500.0
+    "price": 29500.0,
+    "inventoryNumber": 1010
   },
   "1002": {
     "make": "Honda",
@@ -41,7 +44,8 @@
     "mileage": 42000,
     "gasMileage": 34.1,
     "engineSize": 2.0,
-    "price": 18500.0
+    "price": 18500.0,
+    "inventoryNumber": 1002
   },
   "1003": {
     "make": "Ford",
@@ -52,7 +56,8 @@
     "mileage": 12000,
     "gasMileage": 22.0,
     "engineSize": 3.5,
-    "price": 35000.0
+    "price": 35000.0,
+    "inventoryNumber": 1003
   },
   "1004": {
     "make": "Chevrolet",
@@ -63,7 +68,8 @@
     "mileage": 18000,
     "gasMileage": 20.5,
     "engineSize": 5.3,
-    "price": 38000.0
+    "price": 38000.0,
+    "inventoryNumber": 1004
   },
   "1005": {
     "make": "Nissan",
@@ -74,7 +80,8 @@
     "mileage": 28000,
     "gasMileage": 31.0,
     "engineSize": 2.5,
-    "price": 19500.0
+    "price": 19500.0,
+    "inventoryNumber": 1005
   },
   "1006": {
     "make": "Jeep",
@@ -85,7 +92,8 @@
     "mileage": 22000,
     "gasMileage": 21.0,
     "engineSize": 3.6,
-    "price": 41000.0
+    "price": 41000.0,
+    "inventoryNumber": 1006
   },
   "1007": {
     "make": "Subaru",
@@ -96,6 +104,67 @@
     "mileage": 54000,
     "gasMileage": 27.0,
     "engineSize": 2.5,
-    "price": 17500.0
+    "price": 17500.0,
+    "inventoryNumber": 1007
+  },
+  "1011": {
+    "make": "Audi",
+    "model": "A4",
+    "bodyStyle": "Sedan",
+    "color": "Gray",
+    "year": 2022,
+    "mileage": 11000,
+    "gasMileage": 29.0,
+    "engineSize": 2.0,
+    "price": 42000.0,
+    "inventoryNumber": 1011
+  },
+  "1012": {
+    "make": "Hyundai",
+    "model": "Tucson",
+    "bodyStyle": "SUV",
+    "color": "Black",
+    "year": 2023,
+    "mileage": 8000,
+    "gasMileage": 26.0,
+    "engineSize": 2.5,
+    "price": 31000.0,
+    "inventoryNumber": 1012
+  },
+  "1013": {
+    "make": "Kia",
+    "model": "K5",
+    "bodyStyle": "Sedan",
+    "color": "Blue",
+    "year": 2021,
+    "mileage": 21000,
+    "gasMileage": 32.0,
+    "engineSize": 1.6,
+    "price": 26000.0,
+    "inventoryNumber": 1013
+  },
+  "1014": {
+    "make": "GMC",
+    "model": "Sierra 1500",
+    "bodyStyle": "Truck",
+    "color": "White",
+    "year": 2022,
+    "mileage": 15000,
+    "gasMileage": 21.0,
+    "engineSize": 5.3,
+    "price": 39500.0,
+    "inventoryNumber": 1014
+  },
+  "1016": {
+    "make": "GMC",
+    "model": "Terrain",
+    "bodyStyle": "SUV",
+    "color": "White",
+    "year": 2017,
+    "mileage": 58000,
+    "gasMileage": 18.9,
+    "engineSize": 2.4,
+    "price": 12999.0,
+    "inventoryNumber": 1016
   }
 }

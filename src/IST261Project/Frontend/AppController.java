@@ -1,8 +1,10 @@
 package IST261Project.Frontend;
 
 import IST261Project.Backend.CarObject;
+import IST261Project.Backend.FilterInventory;
 import IST261Project.Backend.InventoryManager;
 import IST261Project.Backend.InventoryStorageHandler;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +28,8 @@ public class AppController {
         appView.getButtonAdd().addActionListener(e -> handleAddCar());
         appView.getButtonRemove().addActionListener(e -> handleRemoveCar());
         appView.getButtonPurchase().addActionListener(e-> showPurchasePage());
+        appView.getButtonFilter().addActionListener(e ->filterInventory());
+        appView.getButtonResetView().addActionListener(e -> resetView());
     }
 
     private void showPurchasePage(){
@@ -43,7 +47,7 @@ public class AppController {
 
         inventoryManager.addCar(newCar);
         InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
-        displayInventory();
+        displayInventory(inventoryManager.getInventory());
         JOptionPane.showMessageDialog(appView.getMainFrame(), "Added car #" + newCar.getInventoryNumber());
     }
 
@@ -52,7 +56,7 @@ public class AppController {
         if (removedInventoryNumber == null) return;
 
         InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
-        displayInventory();
+        displayInventory(inventoryManager.getInventory());
         JOptionPane.showMessageDialog(appView.getMainFrame(), "Removed car #" + removedInventoryNumber);
     }
 
@@ -77,8 +81,19 @@ public class AppController {
         Collections.sort(makes);
         return makes;
     }
+
+    //Filter Inventory
+    private void filterInventory(){
+        displayInventory(FilterInventory.filterByYearRange(inventoryManager.getInventory(), 2016, 2020));
+    }
+
+    //Reset Inventory View
+    private void resetView(){
+        displayInventory(inventoryManager.getInventory());
+    }
+
     // front end main page GUI inventory scroll pane
-    public void displayInventory(){
+    public void displayInventory(Map<Integer, CarObject> inventory){
         JPanel inventoryPanel = appView.getInventoryPanel();
         inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
         inventoryPanel.removeAll();
@@ -109,8 +124,9 @@ public class AppController {
         inventoryPanel.add(header);
         inventoryPanel.add(Box.createRigidArea(new Dimension(0,5))); //spacing
 
+
         // add card for each car
-        for (CarObject car : inventoryManager.getInventory().values()){
+        for (CarObject car : inventory.values()){
             JPanel carCard = new JPanel();
             carCard.setLayout(new BoxLayout(carCard, BoxLayout.X_AXIS));
             carCard.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));

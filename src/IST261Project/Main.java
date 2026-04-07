@@ -22,7 +22,7 @@ public class Main {
 
             AppView appView = new AppView();
             AppController controller = new AppController(appView, inventoryManager);
-            controller.displayInventory();
+            controller.displayInventory(inventoryManager.getInventory());
 
             JFrame frame = new JFrame("Dealership Inventory");
             frame.setContentPane(appView.getMainFrame());

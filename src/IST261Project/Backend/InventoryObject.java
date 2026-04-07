@@ -13,6 +13,11 @@ public class InventoryObject{
         return inventoryNumber;
     }
 
+    //Setter Method
+    public void setInventoryNumber(int inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
+    }
+
     //To String
     @Override
     public String toString() {

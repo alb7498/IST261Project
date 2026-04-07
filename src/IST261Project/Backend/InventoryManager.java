@@ -1,6 +1,5 @@
 package IST261Project.Backend;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryManager {
@@ -8,7 +7,7 @@ public class InventoryManager {
     private Map<Integer, CarObject> inventory;
 
     public InventoryManager() {
-        inventory = new HashMap<>();
+        inventory = InventoryStorageHandler.loadInventory();
     }
 
     public void addCar(CarObject car) {
@@ -25,5 +24,9 @@ public class InventoryManager {
 
     public Map<Integer, CarObject> getInventory() {
         return inventory;
+    }
+
+    public void saveInventory() {
+        InventoryStorageHandler.saveInventory(inventory);
     }
 }
