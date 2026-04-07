@@ -20,6 +20,9 @@ public class AppView {
     private JLabel labelModel;
     private JLabel labelGasMileage;
     private JLabel labelColor;
+    private JPanel topPanel;
+    private JPanel inventoryPanel;
+    private JPanel PurchasePage;
 
     public JPanel getMainFrame() {
         return MainFrame;
@@ -88,5 +91,17 @@ public class AppView {
 
     public JLabel getLabelColor() {
         return labelColor;
+    }
+
+    public JPanel getTopPanel() {
+        return topPanel;
+    }
+
+    public JPanel getInventoryPanel() {
+        return inventoryPanel;
+    }
+
+    public JPanel getPurchasePage() {
+        return PurchasePage;
     }
 }

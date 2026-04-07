@@ -5,6 +5,7 @@ import IST261Project.Backend.InventoryManager;
 import IST261Project.Backend.InventoryStorageHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,8 +25,13 @@ public class AppController {
     private void wireEvents() {
         appView.getButtonAdd().addActionListener(e -> handleAddCar());
         appView.getButtonRemove().addActionListener(e -> handleRemoveCar());
+        appView.getButtonPurchase().addActionListener(e-> showPurchasePage());
     }
 
+    private void showPurchasePage(){
+        PurchasePage purchasePage = new PurchasePage();
+        purchasePage.setVisible(true);
+    }
     private void handleAddCar() {
         List<String> makes = makesFromInventory(inventoryManager.getInventory());
         int nextInventoryNumber = nextInventoryNumber(inventoryManager.getInventory());
@@ -37,6 +43,7 @@ public class AppController {
 
         inventoryManager.addCar(newCar);
         InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
+        displayInventory();
         JOptionPane.showMessageDialog(appView.getMainFrame(), "Added car #" + newCar.getInventoryNumber());
     }
 
@@ -45,6 +52,7 @@ public class AppController {
         if (removedInventoryNumber == null) return;
 
         InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
+        displayInventory();
         JOptionPane.showMessageDialog(appView.getMainFrame(), "Removed car #" + removedInventoryNumber);
     }
 
@@ -68,5 +76,68 @@ public class AppController {
         }
         Collections.sort(makes);
         return makes;
+    }
+    // front end main page GUI inventory scroll pane
+    public void displayInventory(){
+        JPanel inventoryPanel = appView.getInventoryPanel();
+        inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
+        inventoryPanel.removeAll();
+        // header row
+        JPanel header = new JPanel();
+        header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+        header.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        header.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        header.add(new JLabel("ID"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Make"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Model"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Year"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Miles"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Body Style"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Gas Mileage"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Engine"));
+        header.add(Box.createRigidArea(new Dimension(10,0)));
+        header.add(new JLabel("Price"));
+
+        inventoryPanel.add(header);
+        inventoryPanel.add(Box.createRigidArea(new Dimension(0,5))); //spacing
+
+        // add card for each car
+        for (CarObject car : inventoryManager.getInventory().values()){
+            JPanel carCard = new JPanel();
+            carCard.setLayout(new BoxLayout(carCard, BoxLayout.X_AXIS));
+            carCard.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            carCard.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+
+            carCard.add(new JLabel((String.valueOf(car.getInventoryNumber()))));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(car.getMake()));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(car.getModel()));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(String.valueOf(car.getYear())));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(String.valueOf(car.getMileage())));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(car.getBodyStyle()));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(String.valueOf(car.getGasMileage())));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel(String.valueOf(car.getEngineSize())));
+            carCard.add(Box.createRigidArea(new Dimension(10,0)));
+            carCard.add(new JLabel("$" + car.getPrice()));
+
+            inventoryPanel.add(carCard);
+            inventoryPanel.add(Box.createRigidArea(new Dimension(0,5))); //spacing
+        }
+        inventoryPanel.revalidate();
+        inventoryPanel.repaint();
     }
 }
