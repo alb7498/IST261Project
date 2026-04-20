@@ -24,7 +24,7 @@ public class AppView {
     private JPanel inventoryPanel;
     private JPanel PurchasePage;
 
-    public JPanel getMainFrame() {
+    public JPanel getMainPanel() {
         return MainFrame;
     }
 
@@ -47,7 +47,6 @@ public class AppView {
     public JButton getButtonPurchase() {
         return buttonPurchase;
     }
-
 
     public JButton getButtonFilter() {
         return buttonFilter;

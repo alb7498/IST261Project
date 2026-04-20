@@ -1,16 +1,4 @@
 {
-  "1008": {
-    "make": "BMW",
-    "model": "330i",
-    "bodyStyle": "Sedan",
-    "color": "Black",
-    "year": 2022,
-    "mileage": 9000,
-    "gasMileage": 30.0,
-    "engineSize": 2.0,
-    "price": 44000.0,
-    "inventoryNumber": 1008
-  },
   "1009": {
     "make": "Tesla",
     "model": "Model 3",
@@ -22,18 +10,6 @@
     "engineSize": 0.0,
     "price": 47000.0,
     "inventoryNumber": 1009
-  },
-  "1010": {
-    "make": "Toyota",
-    "model": "RAV4",
-    "bodyStyle": "SUV",
-    "color": "Blue",
-    "year": 2021,
-    "mileage": 24000,
-    "gasMileage": 28.0,
-    "engineSize": 2.5,
-    "price": 29500.0,
-    "inventoryNumber": 1010
   },
   "1002": {
     "make": "Honda",

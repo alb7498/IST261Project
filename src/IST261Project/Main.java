@@ -12,6 +12,15 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
+        System.setProperty("sun.java2d.d3d", "false");
+        System.setProperty("sun.java2d.opengl", "false");
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         SwingUtilities.invokeLater(() -> {
             Map<Integer, CarObject> storedInventory = InventoryStorageHandler.loadInventory();
 
@@ -25,7 +34,7 @@ public class Main {
             controller.displayInventory(inventoryManager.getInventory());
 
             JFrame frame = new JFrame("Dealership Inventory");
-            frame.setContentPane(appView.getMainFrame());
+            frame.setContentPane(appView.getMainPanel());
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.pack();
             frame.setLocationRelativeTo(null);
