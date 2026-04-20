@@ -28,7 +28,7 @@ public class AppController {
     private void wireEvents() {
         appView.getButtonAdd().addActionListener(e -> handleAddCar());
         appView.getButtonRemove().addActionListener(e -> handleRemoveCar());
-        appView.getButtonFilter().addActionListener(e ->filterInventory());
+        appView.getButtonFilter().addActionListener(e -> filterInventory());
         appView.getButtonResetView().addActionListener(e -> resetView());
         appView.getInventoryPanel().setLayout(new BoxLayout(appView.getInventoryPanel(),BoxLayout.Y_AXIS));
     }
@@ -41,7 +41,7 @@ public class AppController {
         List<String> makes = makesFromInventory(inventoryManager.getInventory());
         int nextInventoryNumber = nextInventoryNumber(inventoryManager.getInventory());
 
-        CarObject newCar = AddCarDialog.showDialog(appView.getMainFrame(), makes, nextInventoryNumber);
+        CarObject newCar = AddCarDialog.showDialog(appView.getMainPagePanel(), makes, nextInventoryNumber);
         if (newCar == null) {
             return;
         }
@@ -49,16 +49,16 @@ public class AppController {
         inventoryManager.addCar(newCar);
         InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
         displayInventory(inventoryManager.getInventory());
-        JOptionPane.showMessageDialog(appView.getMainFrame(), "Added car #" + newCar.getInventoryNumber());
+        JOptionPane.showMessageDialog(appView.getMainPagePanel(), "Added car #" + newCar.getInventoryNumber());
     }
 
     private void handleRemoveCar() {
-        Integer removedInventoryNumber = RemoveCarForm.showDialog(appView.getMainFrame(), inventoryManager);
+        Integer removedInventoryNumber = RemoveCarForm.showDialog(appView.getMainPagePanel(), inventoryManager);
         if (removedInventoryNumber == null) return;
 
         InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
         displayInventory(inventoryManager.getInventory());
-        JOptionPane.showMessageDialog(appView.getMainFrame(), "Removed car #" + removedInventoryNumber);
+        JOptionPane.showMessageDialog(appView.getMainPagePanel(), "Removed car #" + removedInventoryNumber);
     }
 
     private int nextInventoryNumber(Map<Integer, CarObject> inventory) {
@@ -85,7 +85,12 @@ public class AppController {
 
     //Filter Inventory
     private void filterInventory(){
-        displayInventory(FilterInventory.filterByYearRange(inventoryManager.getInventory(), 2016, 2020));
+        // displayInventory(FilterInventory.filterByYearRange(inventoryManager.getInventory(), 2016, 2020));
+        FilterInventory filter = new FilterInventory();
+        Map<Integer, CarObject> result =
+                filter.filterByMinYear(inventoryManager.getInventory(), 2016);
+        result = filter.filterByMaxYear(result, 2020);
+        displayInventory(result);
     }
 
     //Reset Inventory View
@@ -98,7 +103,7 @@ public class AppController {
         JPanel inventoryPanel = appView.getInventoryPanel();
         inventoryPanel.removeAll();
 
-        for (CarObject car : inventoryManager.getInventory().values()){
+        for (CarObject car : inventory.values()){
             JPanel card = new JPanel();
             card.setLayout(new BorderLayout());
             card.setBorder(BorderFactory.createLineBorder(Color.BLACK));
