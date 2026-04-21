@@ -4,147 +4,192 @@ import IST261Project.Backend.CarObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class AddCarDialog {
+public class AddCarDialog extends JDialog {
+    private static final String OTHER_MAKE_OPTION = "Other";
 
-    private AddCarDialog() {
+    private JPanel mainPanel;
+    private JComboBox<String> makeComboBox;
+    private JLabel otherMakeLabel;
+    private JTextField otherMakeField;
+    private JTextField modelField;
+    private JComboBox<String> bodyStyleComboBox;
+    private JComboBox<String> colorComboBox;
+    private JComboBox<Integer> yearComboBox;
+    private JTextField mileageField;
+    private JTextField gasMileageField;
+    private JTextField engineSizeField;
+    private JTextField priceField;
+    private JButton cancelButton;
+    private JButton saveButton;
+    private JLabel inventoryNumberValueLabel;
+
+    private CarObject createdCar;
+    private final int inventoryNumber;
+
+    public AddCarDialog(Window owner, List<String> makes, int inventoryNumber) {
+        super(owner, "Add New Car", Dialog.ModalityType.APPLICATION_MODAL);
+        this.inventoryNumber = inventoryNumber;
+
+        setContentPane(mainPanel);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+
+        loadMakes(makes);
+        loadBodyStyles();
+        loadColors();
+        loadYears();
+        inventoryNumberValueLabel.setText(String.valueOf(inventoryNumber));
+        getRootPane().setDefaultButton(saveButton);
+
+        wireEvents();
+
+        pack();
+        setLocationRelativeTo(owner);
     }
 
     public static CarObject showDialog(Component parent, List<String> makes, int inventoryNumber) {
-        List<String> safeMakes = new ArrayList<>(makes == null ? Collections.emptyList() : makes);
-        if (safeMakes.isEmpty()) {
-            safeMakes.add("Toyota");
-            safeMakes.add("Honda");
-            safeMakes.add("Ford");
-            safeMakes.add("Chevrolet");
+        Window owner = SwingUtilities.getWindowAncestor(parent);
+        AddCarDialog dialog = new AddCarDialog(owner, makes, inventoryNumber);
+        dialog.setVisible(true);
+        return dialog.createdCar;
+    }
+
+    private void loadMakes(List<String> makes) {
+        List<String> safeMakes = new ArrayList<>(Arrays.asList(
+                "Toyota",
+                "Honda",
+                "Ford",
+                "Chevrolet",
+                "Nissan",
+                "Hyundai",
+                "Kia",
+                "Jeep",
+                "Subaru",
+                "GMC",
+                "Ram",
+                "Dodge",
+                "BMW",
+                "Mercedes-Benz",
+                "Volkswagen",
+                "Lexus",
+                "Audi",
+                "Mazda",
+                "Tesla",
+                "Cadillac"
+        ));
+
+        if (makes != null) {
+            for (String make : makes) {
+                if (make != null && !make.trim().isEmpty() && !safeMakes.contains(make.trim())) {
+                    safeMakes.add(make.trim());
+                }
+            }
         }
 
-        JComboBox<String> makeCombo = new JComboBox<>(safeMakes.toArray(new String[0]));
-        JTextField modelField = new JTextField();
-        JTextField bodyStyleField = new JTextField();
-        JTextField colorField = new JTextField();
-        JTextField yearField = new JTextField();
-        JTextField mileageField = new JTextField();
-        JTextField gasMileageField = new JTextField();
-        JTextField engineSizeField = new JTextField();
-        JTextField priceField = new JTextField();
+        Collections.sort(safeMakes);
+        safeMakes.add(OTHER_MAKE_OPTION);
 
-        JLabel selectedMakeValue = new JLabel((String) makeCombo.getSelectedItem());
-        makeCombo.addActionListener(e -> selectedMakeValue.setText((String) makeCombo.getSelectedItem()));
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (String make : safeMakes) {
+            model.addElement(make);
+        }
+        makeComboBox.setModel(model);
+        otherMakeLabel.setVisible(false);
+        otherMakeField.setVisible(false);
+        otherMakeField.setText("");
+    }
 
-        JPanel stepMake = new JPanel(new GridLayout(0, 1, 8, 8));
-        stepMake.add(new JLabel("Select car make:"));
-        stepMake.add(makeCombo);
+    private void loadBodyStyles() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (String bodyStyle : Arrays.asList("Sedan", "SUV", "Truck", "Coupe", "Hatchback", "Van", "Convertible", "Wagon")) {
+            model.addElement(bodyStyle);
+        }
+        bodyStyleComboBox.setModel(model);
+    }
 
-        JPanel stepDetails = new JPanel(new GridLayout(0, 2, 8, 8));
-        stepDetails.add(new JLabel("Make:"));
-        stepDetails.add(selectedMakeValue);
-        stepDetails.add(new JLabel("Model:"));
-        stepDetails.add(modelField);
-        stepDetails.add(new JLabel("Body Style:"));
-        stepDetails.add(bodyStyleField);
-        stepDetails.add(new JLabel("Color:"));
-        stepDetails.add(colorField);
-        stepDetails.add(new JLabel("Year:"));
-        stepDetails.add(yearField);
-        stepDetails.add(new JLabel("Mileage:"));
-        stepDetails.add(mileageField);
-        stepDetails.add(new JLabel("Gas Mileage:"));
-        stepDetails.add(gasMileageField);
-        stepDetails.add(new JLabel("Engine Size:"));
-        stepDetails.add(engineSizeField);
-        stepDetails.add(new JLabel("Price:"));
-        stepDetails.add(priceField);
+    private void loadColors() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (String color : Arrays.asList("Black", "White", "Gray", "Silver", "Blue", "Red", "Green",
+                "Brown", "Purple", "Pink")) {
+            model.addElement(color);
+        }
+        colorComboBox.setModel(model);
+    }
 
-        CardLayout cardLayout = new CardLayout();
-        JPanel cardPanel = new JPanel(cardLayout);
-        cardPanel.add(stepMake, "MAKE");
-        cardPanel.add(stepDetails, "DETAILS");
+    private void loadYears() {
+        DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<>();
+        int currentYear = Year.now().getValue();
+        for (int year = currentYear + 1; year >= 1990; year--) {
+            model.addElement(year);
+        }
+        yearComboBox.setModel(model);
+    }
 
-        JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(parent), "Add New Car", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        dialog.setLayout(new BorderLayout(10, 10));
-        dialog.add(cardPanel, BorderLayout.CENTER);
+    private void wireEvents() {
+        cancelButton.addActionListener(e -> dispose());
+        saveButton.addActionListener(e -> saveCar());
+        makeComboBox.addActionListener(e -> toggleOtherMakeField());
+    }
 
-        JButton backButton = new JButton("Back");
-        JButton nextButton = new JButton("Next");
-        JButton saveButton = new JButton("Save");
-        JButton cancelButton = new JButton("Cancel");
+    private void saveCar() {
+        try {
+            String makeSelection = (String) makeComboBox.getSelectedItem();
+            String make = OTHER_MAKE_OPTION.equals(makeSelection)
+                    ? otherMakeField.getText().trim()
+                    : makeSelection.trim();
+            String model = modelField.getText().trim();
+            String bodyStyle = ((String) bodyStyleComboBox.getSelectedItem()).trim();
+            String color = ((String) colorComboBox.getSelectedItem()).trim();
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.add(backButton);
-        buttonPanel.add(nextButton);
-        buttonPanel.add(saveButton);
-        buttonPanel.add(cancelButton);
-        dialog.add(buttonPanel, BorderLayout.SOUTH);
+            int year = (Integer) yearComboBox.getSelectedItem();
+            int mileage = Integer.parseInt(mileageField.getText().trim());
+            double gasMileage = Double.parseDouble(gasMileageField.getText().trim());
+            double engineSize = Double.parseDouble(engineSizeField.getText().trim());
+            double price = Double.parseDouble(priceField.getText().trim());
 
-        backButton.setEnabled(false);
-        saveButton.setEnabled(false);
-
-        final CarObject[] result = new CarObject[1];
-
-        nextButton.addActionListener(e -> {
-            cardLayout.show(cardPanel, "DETAILS");
-            backButton.setEnabled(true);
-            nextButton.setEnabled(false);
-            saveButton.setEnabled(true);
-        });
-
-        backButton.addActionListener(e -> {
-            cardLayout.show(cardPanel, "MAKE");
-            backButton.setEnabled(false);
-            nextButton.setEnabled(true);
-            saveButton.setEnabled(false);
-        });
-
-        cancelButton.addActionListener(e -> dialog.dispose());
-
-        saveButton.addActionListener(e -> {
-            try {
-                String make = ((String) makeCombo.getSelectedItem()).trim();
-                String model = modelField.getText().trim();
-                String bodyStyle = bodyStyleField.getText().trim();
-                String color = colorField.getText().trim();
-
-                int year = Integer.parseInt(yearField.getText().trim());
-                int mileage = Integer.parseInt(mileageField.getText().trim());
-                double gasMileage = Double.parseDouble(gasMileageField.getText().trim());
-                double engineSize = Double.parseDouble(engineSizeField.getText().trim());
-                double price = Double.parseDouble(priceField.getText().trim());
-
-                if (model.isEmpty() || bodyStyle.isEmpty() || color.isEmpty()) {
-                    throw new IllegalArgumentException("Model, body style, and color are required.");
-                }
-
-                result[0] = new CarObject(
-                        inventoryNumber,
-                        make,
-                        model,
-                        bodyStyle,
-                        color,
-                        year,
-                        mileage,
-                        gasMileage,
-                        engineSize,
-                        price
-                );
-                dialog.dispose();
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(dialog, "Year, mileage, gas mileage, engine size, and price must be valid numbers.");
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(dialog, ex.getMessage());
+            if (make.isEmpty()) {
+                throw new IllegalArgumentException("Make is required.");
             }
-        });
+            if (model.isEmpty()) {
+                throw new IllegalArgumentException("Model is required.");
+            }
 
-        dialog.pack();
-        dialog.setLocationRelativeTo(parent);
-        dialog.setVisible(true);
+            createdCar = new CarObject(
+                    inventoryNumber,
+                    make,
+                    model,
+                    bodyStyle,
+                    color,
+                    year,
+                    mileage,
+                    gasMileage,
+                    engineSize,
+                    price
+            );
+            dispose();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Mileage, gas mileage, engine size, and price must be valid numbers.");
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 
-        return result[0];
+    private void toggleOtherMakeField() {
+        boolean showOtherField = OTHER_MAKE_OPTION.equals(makeComboBox.getSelectedItem());
+        otherMakeLabel.setVisible(showOtherField);
+        otherMakeField.setVisible(showOtherField);
+        if (!showOtherField) {
+            otherMakeField.setText("");
+        }
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        pack();
     }
 }
-
-
