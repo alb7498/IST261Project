@@ -10,8 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AppController {
 
@@ -250,11 +252,11 @@ public class AppController {
             //car info
             JTextArea info = new JTextArea(
                     car.getYear() + " " + car.getMake() + " " + car.getModel() + "\n" +
-                    "Price: $" + car.getPrice() + "\n" +
-                    "Miles: " + car.getMileage() + "\n" +
-                    "Gas Mileage: " + car.getGasMileage() + "\n" +
-                    "Color: " + car.getColor() + "\n" +
-                    "Engine Size: " + car.getEngineSize()
+                            "Price: $" + car.getPrice() + "\n" +
+                            "Miles: " + car.getMileage() + "\n" +
+                            "Gas Mileage: " + car.getGasMileage() + "\n" +
+                            "Color: " + car.getColor() + "\n" +
+                            "Engine Size: " + car.getEngineSize()
             );
             info.setEditable(false);
 
