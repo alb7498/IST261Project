@@ -8,12 +8,10 @@ import IST261Project.Backend.InventoryStorageHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
+import java.net.URL;
+import java.time.Year;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class AppController {
 
@@ -126,7 +124,7 @@ public class AppController {
             Map<Integer, CarObject> inventory  = inventoryManager.getInventory();
 
             // Year Validation
-            int currentYear = java.time.Year.now().getValue();
+            int currentYear = Year.now().getValue();
 
             String minYearText = filterPage.getMinYearTF().getText().trim();
             String maxYearText = filterPage.getMaxYearTF().getText().trim();
@@ -245,9 +243,31 @@ public class AppController {
             JPanel card = new JPanel();
             card.setPreferredSize(new Dimension(450, 180)); // width, height
             card.setMaximumSize(new Dimension(450, 180));   // prevents stretching
-            card.setMinimumSize(new Dimension(450, 180));   // optional
+            card.setMinimumSize(new Dimension(450, 180));
             card.setLayout(new BorderLayout());
             card.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+            String path = car.getImagePath();
+
+            System.out.println("PATH: " + path);
+
+            URL url = getClass().getResource(path);
+            System.out.println("URL:" + url);
+
+            JLabel imageLabel;
+
+            if (url != null) {
+                ImageIcon carImage = new ImageIcon(url);
+
+                Image scaled = carImage.getImage()
+                        .getScaledInstance(150, 120, Image.SCALE_SMOOTH);
+
+                imageLabel = new JLabel(new ImageIcon(scaled));
+            } else {
+                System.out.println("Missing Image:" + car.getImagePath());
+                imageLabel = new JLabel("No Image");
+            }
+
 
             //car info
             JTextArea info = new JTextArea(
@@ -270,6 +290,7 @@ public class AppController {
             });
 
             //add to card
+            card.add(imageLabel, BorderLayout.EAST);
             card.add(info, BorderLayout.CENTER);
             card.add(purchaseBtn, BorderLayout.SOUTH);
 

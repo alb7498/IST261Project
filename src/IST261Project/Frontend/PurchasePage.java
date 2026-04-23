@@ -32,6 +32,7 @@ public class PurchasePage extends JFrame {
     private JLabel labelAddress;
     private JTextField textAddress;
     private JButton buttonConfirmPurchase;
+    private JButton searchButton;
 
     public JButton getButtonConfirmPurchase() {
         return buttonConfirmPurchase;
@@ -52,6 +53,8 @@ public class PurchasePage extends JFrame {
     public JLabel getLabelCardNum() {
         return labelCardNum;
     }
+
+    public JButton getSearchButton() { return searchButton; }
 
     public JTextField getTextInvNum() {
         return textInvNum;

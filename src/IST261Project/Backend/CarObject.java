@@ -13,6 +13,7 @@ public class CarObject extends InventoryObject{
     private double gasMileage;
     private double engineSize;
     private double price;
+    private String imagePath;
 
     public CarObject(int inventoryNumber, String make, String model, String bodyStyle, String color,
                      int year, int mileage, double gasMileage, double engineSize, double price) {
@@ -41,6 +42,7 @@ public class CarObject extends InventoryObject{
     public String getColor() {
         return color;
     }
+
     public int getYear() {
         return year;
     }
@@ -57,6 +59,11 @@ public class CarObject extends InventoryObject{
         return price;
     }
 
+    public String getImagePath(){ return "/images/" +
+            year + "_" + color.toLowerCase().replace(" ", "_") + "_" +
+        make.toLowerCase().replace(" ", "_") + "_" +
+            model.toLowerCase().replace(" ", "_") + ".png" ; }
+
     //Setter Methods (Only set what makes sense)
     public void setPrice(double price) {
         if(price >=0)
@@ -66,6 +73,7 @@ public class CarObject extends InventoryObject{
         if(mileage >= 0)
             this.mileage = mileage;
     }
+
 
     @Override
     public String toString() {

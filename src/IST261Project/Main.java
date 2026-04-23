@@ -5,6 +5,7 @@ import IST261Project.Backend.InventoryManager;
 import IST261Project.Backend.InventoryStorageHandler;
 import IST261Project.Frontend.AppController;
 import IST261Project.Frontend.AppView;
+import IST261Project.Frontend.PurchasePage;
 
 import javax.swing.*;
 import java.util.Map;
@@ -24,12 +25,13 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             Map<Integer, CarObject> storedInventory = InventoryStorageHandler.loadInventory();
 
-            InventoryManager inventoryManager = new InventoryManager();
+           InventoryManager inventoryManager = new InventoryManager();
             for (CarObject car : storedInventory.values()) {
                 inventoryManager.addCar(car);
             }
 
             AppView appView = new AppView();
+            PurchasePage purchasePage = new PurchasePage();
             AppController controller = new AppController(appView, inventoryManager);
             controller.displayInventory(inventoryManager.getInventory());
 
