@@ -7,8 +7,9 @@
     "year": 2023,
     "mileage": 5000,
     "gasMileage": 0.0,
-    "engineSize": 0.0,
+    "engineSize": "0.0",
     "price": 47000.0,
+    "imagePath": "/IST261Project/resources/images/2023_white_tesla_model_3.png",
     "inventoryNumber": 1009
   },
   "1002": {
@@ -19,8 +20,9 @@
     "year": 2019,
     "mileage": 42000,
     "gasMileage": 34.1,
-    "engineSize": 2.0,
+    "engineSize": "2.0",
     "price": 18500.0,
+    "imagePath": "/IST261Project/resources/images/2019_white_honda_civic.png",
     "inventoryNumber": 1002
   },
   "1003": {
@@ -31,8 +33,9 @@
     "year": 2022,
     "mileage": 12000,
     "gasMileage": 22.0,
-    "engineSize": 3.5,
+    "engineSize": "3.5",
     "price": 35000.0,
+    "imagePath": "/IST261Project/resources/images/2022_blue_ford_f150.png",
     "inventoryNumber": 1003
   },
   "1004": {
@@ -43,8 +46,9 @@
     "year": 2021,
     "mileage": 18000,
     "gasMileage": 20.5,
-    "engineSize": 5.3,
+    "engineSize": "5.3",
     "price": 38000.0,
+    "imagePath": "/IST261Project/resources/images/2021_red_chevrolet_silverado.png",
     "inventoryNumber": 1004
   },
   "1005": {
@@ -55,8 +59,9 @@
     "year": 2020,
     "mileage": 28000,
     "gasMileage": 31.0,
-    "engineSize": 2.5,
+    "engineSize": "2.5",
     "price": 19500.0,
+    "imagePath": "/IST261Project/resources/images/2020_gray_nissan_altima.png",
     "inventoryNumber": 1005
   },
   "1006": {
@@ -67,8 +72,9 @@
     "year": 2021,
     "mileage": 22000,
     "gasMileage": 21.0,
-    "engineSize": 3.6,
+    "engineSize": "3.6",
     "price": 41000.0,
+    "imagePath": "/IST261Project/resources/images/2021_green_jeep_wrangler.png",
     "inventoryNumber": 1006
   },
   "1007": {
@@ -79,8 +85,9 @@
     "year": 2018,
     "mileage": 54000,
     "gasMileage": 27.0,
-    "engineSize": 2.5,
+    "engineSize": "2.5",
     "price": 17500.0,
+    "imagePath": "/IST261Project/resources/images/2018_silver_subaru_outback.png",
     "inventoryNumber": 1007
   },
   "1011": {
@@ -91,8 +98,9 @@
     "year": 2022,
     "mileage": 11000,
     "gasMileage": 29.0,
-    "engineSize": 2.0,
+    "engineSize": "2.0",
     "price": 42000.0,
+    "imagePath": "/IST261Project/resources/images/2022_gray_audi_a4.png",
     "inventoryNumber": 1011
   },
   "1012": {
@@ -103,8 +111,9 @@
     "year": 2023,
     "mileage": 8000,
     "gasMileage": 26.0,
-    "engineSize": 2.5,
+    "engineSize": "2.5",
     "price": 31000.0,
+    "imagePath": "/IST261Project/resources/images/2023_black_hyundai_tucson.png",
     "inventoryNumber": 1012
   },
   "1013": {
@@ -115,8 +124,9 @@
     "year": 2021,
     "mileage": 21000,
     "gasMileage": 32.0,
-    "engineSize": 1.6,
+    "engineSize": "1.6",
     "price": 26000.0,
+    "imagePath": "/IST261Project/resources/images/2021_blue_kia_k5.png",
     "inventoryNumber": 1013
   },
   "1014": {
@@ -127,8 +137,9 @@
     "year": 2022,
     "mileage": 15000,
     "gasMileage": 21.0,
-    "engineSize": 5.3,
+    "engineSize": "5.3",
     "price": 39500.0,
+    "imagePath": "/IST261Project/resources/images/2022_white_gmc_sierra_1500.png",
     "inventoryNumber": 1014
   },
   "1016": {
@@ -139,8 +150,9 @@
     "year": 2017,
     "mileage": 58000,
     "gasMileage": 18.9,
-    "engineSize": 2.4,
+    "engineSize": "2.4",
     "price": 12999.0,
+    "imagePath": "/IST261Project/resources/images/2017_white_gmc_terrain.png",
     "inventoryNumber": 1016
   }
 }

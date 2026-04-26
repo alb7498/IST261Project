@@ -3,20 +3,18 @@ package IST261Project.Backend;
 public class CarObject extends InventoryObject{
     private String make;
     private String model;
-
-
-    //make enum
     private String  bodyStyle;
     private String color;
     private int year;
     private int mileage;
     private double gasMileage;
-    private double engineSize;
+    private String engineSize;
     private double price;
     private String imagePath;
 
     public CarObject(int inventoryNumber, String make, String model, String bodyStyle, String color,
-                     int year, int mileage, double gasMileage, double engineSize, double price) {
+                     int year, int mileage, double gasMileage, String engineSize, double price,
+                     String imagePath) {
         super(inventoryNumber);
         this.make = make;
         this.model = model;
@@ -27,6 +25,7 @@ public class CarObject extends InventoryObject{
         this.gasMileage = gasMileage;
         this.engineSize = engineSize;
         this.price = price;
+        this.imagePath = imagePath;
     }
 
     //Getter Methods
@@ -52,17 +51,16 @@ public class CarObject extends InventoryObject{
     public double getGasMileage() {
         return gasMileage;
     }
-    public double getEngineSize() {
+    public String getEngineSize() {
         return engineSize;
     }
     public double getPrice() {
         return price;
     }
 
-    public String getImagePath(){ return "/images/" +
-            year + "_" + color.toLowerCase().replace(" ", "_") + "_" +
-        make.toLowerCase().replace(" ", "_") + "_" +
-            model.toLowerCase().replace(" ", "_") + ".png" ; }
+    public String getImagePath() {
+        return imagePath;
+    }
 
     //Setter Methods (Only set what makes sense)
     public void setPrice(double price) {
@@ -73,13 +71,14 @@ public class CarObject extends InventoryObject{
         if(mileage >= 0)
             this.mileage = mileage;
     }
-
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     @Override
     public String toString() {
         return "CarObject{" +
-                "inventoryNumber=" + getInventoryNumber() +
-                ", make='" + make + '\'' +
+                "make='" + make + '\'' +
                 ", model='" + model + '\'' +
                 ", bodyStyle='" + bodyStyle + '\'' +
                 ", color='" + color + '\'' +
@@ -88,6 +87,7 @@ public class CarObject extends InventoryObject{
                 ", gasMileage=" + gasMileage +
                 ", engineSize=" + engineSize +
                 ", price=" + price +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 }

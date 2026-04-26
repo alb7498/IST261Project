@@ -13,6 +13,7 @@ public class AppView {
     private JButton buttonResetView;
     private JPanel topPanel;
     private JPanel inventoryPanel;
+    private JScrollPane mainScrollPanel;
     private JPanel PurchasePage;
 
     public JPanel getMainPanel() {
@@ -54,5 +55,13 @@ public class AppView {
 
     public JPanel getPurchasePage() {
         return PurchasePage;
+    }
+
+    public JPanel getMainFrame() {
+        return MainFrame;
+    }
+
+    public JScrollPane getMainScrollPanel() {
+        return mainScrollPanel;
     }
 }

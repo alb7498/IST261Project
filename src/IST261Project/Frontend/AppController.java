@@ -8,6 +8,7 @@ import IST261Project.Backend.InventoryStorageHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.net.URL;
 import java.time.Year;
 import java.util.*;
@@ -235,69 +236,83 @@ public class AppController {
     }
 
     // front end main page GUI inventory scroll pane
-    public void displayInventory(Map<Integer, CarObject> inventory){
+    public void displayInventory(Map<Integer, CarObject> inventory) {
         JPanel inventoryPanel = appView.getInventoryPanel();
         inventoryPanel.removeAll();
 
-        for (CarObject car : inventory.values()){
-            JPanel card = new JPanel();
-            card.setPreferredSize(new Dimension(450, 180)); // width, height
-            card.setMaximumSize(new Dimension(450, 180));   // prevents stretching
-            card.setMinimumSize(new Dimension(450, 180));
-            card.setLayout(new BorderLayout());
+        // Exactly 2 columns
+        inventoryPanel.setLayout(new GridLayout(0, 2, 15, 15));
+
+        for (CarObject car : inventory.values()) {
+            JPanel card = new JPanel(new BorderLayout());
+            card.setPreferredSize(new Dimension(500, 312));
             card.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            card.setBackground(Color.WHITE);
 
-            String path = car.getImagePath();
-
-            System.out.println("PATH: " + path);
-
-            URL url = getClass().getResource(path);
-            System.out.println("URL:" + url);
-
+            File imageFile = new File("src" + car.getImagePath());
             JLabel imageLabel;
 
-            if (url != null) {
-                ImageIcon carImage = new ImageIcon(url);
+            if (imageFile.exists()) {
+                ImageIcon carImage = new ImageIcon(imageFile.getAbsolutePath());
 
                 Image scaled = carImage.getImage()
-                        .getScaledInstance(150, 120, Image.SCALE_SMOOTH);
+                        .getScaledInstance(220, 180, Image.SCALE_SMOOTH);
 
                 imageLabel = new JLabel(new ImageIcon(scaled));
             } else {
-                System.out.println("Missing Image:" + car.getImagePath());
+                System.out.println("Missing Image: " + car.getImagePath());
                 imageLabel = new JLabel("No Image");
             }
 
+            imageLabel.setPreferredSize(new Dimension(230, 190));
 
-            //car info
-            JTextArea info = new JTextArea(
-                    car.getYear() + " " + car.getMake() + " " + car.getModel() + "\n" +
-                            "Price: $" + car.getPrice() + "\n" +
-                            "Miles: " + car.getMileage() + "\n" +
-                            "Gas Mileage: " + car.getGasMileage() + "\n" +
-                            "Color: " + car.getColor() + "\n" +
-                            "Engine Size: " + car.getEngineSize()
+            JLabel info = new JLabel(
+                    "<html>" +
+                            "<div style='padding:8px; font-size:12px;'>" +
+                            "<b style='font-size:15px;'>" +
+                            car.getYear() + " " + car.getMake() + " " + car.getModel() +
+                            "</b><br><br>" +
+
+                            "<b>Inventory #:</b> " + car.getInventoryNumber() + "<br>" +
+                            "<b>Body Style:</b> " + car.getBodyStyle() + "<br>" +
+                            "<b>Color:</b> " + car.getColor() + "<br>" +
+                            "<b>Mileage:</b> " + car.getMileage() + "<br>" +
+                            "<b>Gas Mileage:</b> " + car.getGasMileage() + "<br>" +
+                            "<b>Engine:</b> " + car.getEngineSize() + "<br><br>" +
+
+                            "<b style='font-size:14px;'>Price: $" + car.getPrice() + "</b>" +
+
+                            "</div></html>"
             );
-            info.setEditable(false);
 
-            //purchase button
             JButton purchaseBtn = new JButton("Purchase");
-            purchaseBtn.addActionListener(e-> {
+            purchaseBtn.setPreferredSize(new Dimension(120, 35));
+            purchaseBtn.setFocusPainted(false);
+
+            purchaseBtn.addActionListener(e -> {
                 PurchasePage purchasePage = new PurchasePage();
-                //sets the car ID in the text field
                 purchasePage.setCarID(car.getInventoryNumber());
                 purchasePage.setVisible(true);
             });
 
-            //add to card
-            card.add(imageLabel, BorderLayout.EAST);
-            card.add(info, BorderLayout.CENTER);
-            card.add(purchaseBtn, BorderLayout.SOUTH);
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setBackground(Color.WHITE);
+            buttonPanel.add(purchaseBtn);
 
-            //add card to main panel
+            card.add(info, BorderLayout.CENTER);
+            card.add(imageLabel, BorderLayout.EAST);
+            card.add(buttonPanel, BorderLayout.SOUTH);
+
             inventoryPanel.add(card);
         }
+
         inventoryPanel.revalidate();
         inventoryPanel.repaint();
+
+        SwingUtilities.invokeLater(() -> {
+            JScrollBar vertical = appView.getMainScrollPanel().getVerticalScrollBar();
+            vertical.setValue(0);
+        });
     }
+
 }

@@ -39,6 +39,7 @@ public class Main {
             frame.setContentPane(appView.getMainPanel());
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.pack();
+            frame.setSize(1400, 900);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
