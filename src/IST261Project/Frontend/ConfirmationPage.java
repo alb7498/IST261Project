@@ -17,7 +17,8 @@ public class ConfirmationPage extends JFrame{
     }
     public void setData(String inventorynumber, String address){
         labelInventoryNumberConfirmation.setText("Inventory Number: " + inventorynumber);
-        labelAddressConfirmation.setText("Address: " + address);
+
+        labelAddressConfirmation.setText("Zip Code: " + address);
     }
     private JPanel mainPanel;
     private JLabel labelPSuccess;

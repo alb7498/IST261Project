@@ -32,6 +32,10 @@ public class PurchasePage extends JFrame {
     private JLabel labelAddress;
     private JTextField textAddress;
     private JButton buttonConfirmPurchase;
+    private JTextField textName;
+    private JLabel labelName;
+    private JTextField textCCV;
+    private JLabel labelCCV;
     private JButton searchButton;
 
     public JButton getButtonConfirmPurchase() {
@@ -67,4 +71,12 @@ public class PurchasePage extends JFrame {
     public JPanel getPurchasePanel() {
         return PurchasePanel;
     }
+
+    public JTextField getTextName() { return textName; }
+
+    public JLabel getLabelName() { return labelName; }
+
+    public JTextField getTextCCV() { return textCCV; }
+
+    public JLabel getLabelCCV() { return labelCCV; }
 }
