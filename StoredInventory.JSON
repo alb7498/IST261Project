@@ -154,5 +154,18 @@
     "price": 12999.0,
     "imagePath": "/IST261Project/resources/images/2017_white_gmc_terrain.png",
     "inventoryNumber": 1016
+  },
+  "1017": {
+    "make": "Tesla",
+    "model": "Model 3",
+    "bodyStyle": "Sedan",
+    "color": "White",
+    "year": 2023,
+    "mileage": 1000,
+    "gasMileage": 0.0,
+    "engineSize": "Electric",
+    "price": 47000.0,
+    "imagePath": "/IST261Project/resources/images/1017_2023_white_tesla_model_3.png",
+    "inventoryNumber": 1017
   }
 }

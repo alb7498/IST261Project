@@ -16,6 +16,7 @@ import java.util.List;
 
 public class AddCarDialog extends JDialog {
     private static final String OTHER_MAKE_OPTION = "Other";
+    private static final String OTHER_ENGINE_OPTION = "Other";
 
     private JPanel mainPanel;
     private JComboBox<String> makeComboBox;
@@ -27,7 +28,9 @@ public class AddCarDialog extends JDialog {
     private JComboBox<Integer> yearComboBox;
     private JTextField mileageField;
     private JTextField gasMileageField;
-    private JTextField engineSizeField;
+    private JComboBox<String> engineComboBox;
+    private JLabel otherEngineLabel;
+    private JTextField otherEngineField;
     private JTextField priceField;
 
     private JTextField imagePathField;
@@ -53,6 +56,7 @@ public class AddCarDialog extends JDialog {
         loadBodyStyles();
         loadColors();
         loadYears();
+        loadEngines();
 
         inventoryNumberValueLabel.setText(String.valueOf(inventoryNumber));
         imagePathField.setEditable(false);
@@ -140,10 +144,29 @@ public class AddCarDialog extends JDialog {
         yearComboBox.setModel(model);
     }
 
+    private void loadEngines() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+        for (String engine : Arrays.asList(
+                "1.5L I4", "1.8L I4", "2.0L I4", "2.5L I4",
+                "3.5L V6", "3.6L V6", "5.0L V8", "5.3L V8",
+                "6.2L V8", "Electric", "Hybrid", "Diesel",
+                OTHER_ENGINE_OPTION
+        )) {
+            model.addElement(engine);
+        }
+
+        engineComboBox.setModel(model);
+        otherEngineLabel.setVisible(false);
+        otherEngineField.setVisible(false);
+        otherEngineField.setText("");
+    }
+
     private void wireEvents() {
         cancelButton.addActionListener(e -> dispose());
         saveButton.addActionListener(e -> saveCar());
         makeComboBox.addActionListener(e -> toggleOtherMakeField());
+        engineComboBox.addActionListener(e -> toggleOtherEngineField());
         chooseImageButton.addActionListener(e -> chooseImageFile());
     }
 
@@ -197,7 +220,10 @@ public class AddCarDialog extends JDialog {
             int year = (Integer) yearComboBox.getSelectedItem();
             int mileage = Integer.parseInt(mileageField.getText().trim());
             double gasMileage = Double.parseDouble(gasMileageField.getText().trim());
-            String engineSize = engineSizeField.getText().trim();
+            String engineSelection = (String) engineComboBox.getSelectedItem();
+            String engineSize = OTHER_ENGINE_OPTION.equals(engineSelection)
+                    ? otherEngineField.getText().trim()
+                    : engineSelection.trim();
             double price = Double.parseDouble(priceField.getText().trim());
 
             if (make.isEmpty()) {
@@ -206,6 +232,10 @@ public class AddCarDialog extends JDialog {
 
             if (model.isEmpty()) {
                 throw new IllegalArgumentException("Model is required.");
+            }
+
+            if (engineSize.isEmpty()) {
+                throw new IllegalArgumentException("Engine is required.");
             }
 
             String imagePath = saveImageToFolder();
@@ -228,7 +258,7 @@ public class AddCarDialog extends JDialog {
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,
-                    "Mileage, gas mileage, engine size, and price must be valid numbers.");
+                    "Mileage, gas mileage, and price must be valid numbers.");
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (IOException ex) {
@@ -245,6 +275,21 @@ public class AddCarDialog extends JDialog {
 
         if (!showOtherField) {
             otherMakeField.setText("");
+        }
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        pack();
+    }
+
+    private void toggleOtherEngineField() {
+        boolean showOtherField = OTHER_ENGINE_OPTION.equals(engineComboBox.getSelectedItem());
+
+        otherEngineLabel.setVisible(showOtherField);
+        otherEngineField.setVisible(showOtherField);
+
+        if (!showOtherField) {
+            otherEngineField.setText("");
         }
 
         mainPanel.revalidate();
