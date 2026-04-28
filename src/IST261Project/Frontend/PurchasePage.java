@@ -11,13 +11,7 @@ public class PurchasePage extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
-        buttonConfirmPurchase.addActionListener(e -> {
-            address = textAddress.getText(); //stores
-            inventorynumber = textInvNum.getText();
-            ConfirmationPage confirm = new ConfirmationPage();
-            confirm.setData(textInvNum.getText(), textAddress.getText());
-            confirm.setVisible(true);
-        });
+
     }
 
     public void setCarID(int id) {
@@ -26,7 +20,7 @@ public class PurchasePage extends JFrame {
 
     private JPanel PurchasePanel;
     private JLabel labelInvNum;
-    private JTextField textInvNum;
+    private JLabel textInvNum;
     private JLabel labelCardNum;
     private JTextField textCarNum;
     private JLabel labelAddress;
@@ -36,7 +30,6 @@ public class PurchasePage extends JFrame {
     private JLabel labelName;
     private JTextField textCCV;
     private JLabel labelCCV;
-    private JButton searchButton;
 
     public JButton getButtonConfirmPurchase() {
         return buttonConfirmPurchase;
@@ -58,9 +51,7 @@ public class PurchasePage extends JFrame {
         return labelCardNum;
     }
 
-    public JButton getSearchButton() { return searchButton; }
-
-    public JTextField getTextInvNum() {
+    public JLabel getTextInvNum() {
         return textInvNum;
     }
 

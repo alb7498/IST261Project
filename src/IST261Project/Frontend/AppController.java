@@ -34,10 +34,6 @@ public class AppController {
         appView.getInventoryPanel().setLayout(new BoxLayout(appView.getInventoryPanel(),BoxLayout.Y_AXIS));
     }
 
-    private void showPurchasePage(){
-        PurchasePage purchasePage = new PurchasePage();
-        purchasePage.setVisible(true);
-    }
     private void handleAddCar() {
         List<String> makes = makesFromInventory(inventoryManager.getInventory());
         int nextInventoryNumber = nextInventoryNumber(inventoryManager.getInventory());
@@ -96,7 +92,6 @@ public class AppController {
         Collections.sort(colors);
         return colors;
     }
-
 
     //Filter Inventory
     private void filterInventoryPage(){
@@ -290,9 +285,7 @@ public class AppController {
             purchaseBtn.setFocusPainted(false);
 
             purchaseBtn.addActionListener(e -> {
-                PurchasePage purchasePage = new PurchasePage();
-                purchasePage.setCarID(car.getInventoryNumber());
-                purchasePage.setVisible(true);
+                PurchasePage(car);
             });
 
             JPanel buttonPanel = new JPanel();
@@ -315,4 +308,99 @@ public class AppController {
         });
     }
 
-}
+
+    private void PurchasePage(CarObject car){
+        PurchasePage purchasePage = new PurchasePage();
+        purchasePage.setCarID(car.getInventoryNumber());
+        purchasePage.setVisible(true);
+
+        purchasePage.getButtonConfirmPurchase().addActionListener(e -> {
+            String name = purchasePage.getTextName().getText();
+            String address = purchasePage.getTextAddress().getText();
+            String inventorynumber = purchasePage.getTextInvNum().getText();
+            String cardNum = purchasePage.getLabelCardNum().getText();
+            String cvv = purchasePage.getLabelCCV().getText();
+
+            if(name.isEmpty() || address.isEmpty() || cardNum.isEmpty() || cvv.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Please fill in all fields");
+            }
+            else {
+                inventoryManager.removeCar(car.getInventoryNumber());
+                InventoryStorageHandler.saveInventory(inventoryManager.getInventory());
+                displayInventory(inventoryManager.getInventory());
+
+                ConfirmationPage confirm = new ConfirmationPage();
+                confirm.setData(name, inventorynumber, address);
+
+                confirm.getCarPanel().removeAll();
+                confirm.getCarPanel().setLayout(new BorderLayout());
+                confirm.getCarPanel().add(makeCard(car), BorderLayout.CENTER);
+
+                confirm.getCarPanel().revalidate();
+                confirm.getCarPanel().repaint();
+
+                confirm.setSize(700, 600); // adjust size here
+                confirm.setLocationRelativeTo(null);
+
+                purchasePage.dispose(); // closes purchase page
+
+                confirm.setVisible(true);
+            }
+
+
+
+        });
+
+
+
+
+    }
+
+    private JPanel makeCard(CarObject car){
+            JPanel card = new JPanel(new BorderLayout());
+            card.setPreferredSize(new Dimension(500, 312));
+            card.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            card.setBackground(Color.WHITE);
+
+            File imageFile = new File("src" + car.getImagePath());
+            JLabel imageLabel;
+
+            if (imageFile.exists()) {
+                ImageIcon carImage = new ImageIcon(imageFile.getAbsolutePath());
+
+                Image scaled = carImage.getImage()
+                        .getScaledInstance(220, 180, Image.SCALE_SMOOTH);
+
+                imageLabel = new JLabel(new ImageIcon(scaled));
+            } else {
+                System.out.println("Missing Image: " + car.getImagePath());
+                imageLabel = new JLabel("No Image");
+            }
+
+            imageLabel.setPreferredSize(new Dimension(230, 190));
+
+            JLabel info = new JLabel(
+                    "<html>" +
+                            "<div style='padding:8px; font-size:12px;'>" +
+                            "<b style='font-size:15px;'>" +
+                            car.getYear() + " " + car.getMake() + " " + car.getModel() +
+                            "</b><br><br>" +
+
+                            "<b>Inventory #:</b> " + car.getInventoryNumber() + "<br>" +
+                            "<b>Body Style:</b> " + car.getBodyStyle() + "<br>" +
+                            "<b>Color:</b> " + car.getColor() + "<br>" +
+                            "<b>Mileage:</b> " + car.getMileage() + "<br>" +
+                            "<b>Gas Mileage:</b> " + car.getGasMileage() + "<br>" +
+                            "<b>Engine:</b> " + car.getEngineSize() + "<br><br>" +
+
+                            "<b style='font-size:14px;'>Price: $" + car.getPrice() + "</b>" +
+
+                            "</div></html>"
+            );
+            card.add(info, BorderLayout.CENTER);
+            card.add(imageLabel, BorderLayout.EAST);
+           return card;
+        }
+
+
+    }
